@@ -163,6 +163,11 @@ public class StringManager {
      */
     public String getString(final String key, final Object... args) {
         String value = getString(key);
+        try {
+            value = new String(value.getBytes("ISO-8859-1"), "UTF8");
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
         if (value == null) {
             value = key;
         }
